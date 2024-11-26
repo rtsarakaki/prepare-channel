@@ -1,19 +1,17 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v5.0.0
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: master
+    rev: v4.0.0
     hooks:
       - id: commitizen
-      - id: commitizen-branch
-        stages: [pre-push]
 
   - repo: https://github.com/aws-cloudformation/cfn-python-lint
-    rev: v1.19.0
+    rev: v1.20.0
     hooks:
       - id: cfn-python-lint
         args: [--ignore-checks=W]
