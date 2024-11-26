@@ -1,0 +1,36 @@
+name: Deploy AWS Cloudformation Stack With GH Action
+
+# Definir quando nosso workflow será acionado
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: List template files
+        run: ls -l templates/basic
+
+      - name: Deploy Cloudformation stack
+        run: |
+          aws cloudformation deploy \
+            --stack-name stack-created-with-cli \
+            --template-file file://templates/basic/first-template.yaml \
+            --parameter ParameterKey=UserPassword,ParameterValue=${{ secrets.USER_PASSWORD }} \
+            --capabilities CAPABILITY_NAMED_IAM

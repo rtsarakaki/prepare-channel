@@ -10,14 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Install cfn-lint
+        run: |
+          pip install cfn-lint
 
-    - name: Install cfn-lint
-      run: |
-        pip install cfn-lint
-
-    - name: Validate CloudFormation templates
-      run: |
-        cfn-lint -t templates/**/*.yaml --ignore-checks W
+      - name: Validate CloudFormation templates
+        run: |
+          cfn-lint -t templates/**/*.yaml --ignore-checks W
