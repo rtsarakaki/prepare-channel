@@ -31,6 +31,6 @@ jobs:
         run: |
           aws cloudformation deploy \
             --stack-name stack-created-with-cli \
-            --template-file file://templates/basic/first-template.yaml \
+            --template-file templates/basic/first-template.yaml \
             --parameter ParameterKey=UserPassword,ParameterValue=${{ secrets.USER_PASSWORD }} \
             --capabilities CAPABILITY_NAMED_IAM
