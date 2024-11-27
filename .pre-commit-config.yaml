@@ -9,8 +9,6 @@ repos:
     rev: v4.0.0
     hooks:
       - id: commitizen
-      - id: commitizen-branch
-        stages: [manual]
 
   - repo: https://github.com/aws-cloudformation/cfn-python-lint
     rev: v1.20.0
