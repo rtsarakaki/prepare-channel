@@ -32,5 +32,5 @@ jobs:
           aws cloudformation deploy \
             --stack-name stack-created-with-cli \
             --template-file templates/basic/first-template.yaml \
-            --parameter-overrides ParameterKey=UserPassword,ParameterValue=${{ secrets.USER_PASSWORD }} \
+            --parameter-overrides UserPassword=${{ secrets.USER_PASSWORD }} \
             --capabilities CAPABILITY_NAMED_IAM
