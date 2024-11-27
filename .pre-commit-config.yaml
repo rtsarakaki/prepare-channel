@@ -1,15 +1,26 @@
 repos:
+  # PRE-COMMIT
+  # VALIDA SE OS ARQUIVOS TEM ESPAÇOS EM BRANCO NO FINAL
+  # VALIDA SE OS ARQUIVOS TEM QUEBRA DE LINHA NO FINAL
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
+  # COMMITIZEN
+  # VALIDA SE O COMMIT ESTÁ NO FORMATO CORRETO
+  # VALIDA SE O NOME DA BRANCH SEGUE A CONVENÇÃO (feature/hotfix/release/bugfix)
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.0.0
     hooks:
       - id: commitizen
+      - id: commitizen-branch
+        stages: [pre-push]
+        args: [--rev-range=origin/main..HEAD]
 
+  # CFN-LINT
+  # VALIDA SE OS ARQUIVOS CLOUDFORMATION ESTÃO NO FORMATO CORRETO
   - repo: https://github.com/aws-cloudformation/cfn-python-lint
     rev: v1.20.0
     hooks:
@@ -17,6 +28,8 @@ repos:
         args: [--ignore-checks=W]
         files: ^templates/.*\.yaml$
 
+  # GGSHIELD
+  # VALIDA SE OS ARQUIVOS CONTÉM INFORMAÇÕES SENSÍVEIS TAIS COMO SENHAS, CHAVES DE API, ETC
   - repo: https://github.com/gitguardian/ggshield
     rev: v1.33.0
     hooks:
